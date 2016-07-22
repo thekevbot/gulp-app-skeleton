@@ -41,3 +41,9 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch; }
+
+.test {
+  display: -webkit-box;
+  display: flex;
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg); }

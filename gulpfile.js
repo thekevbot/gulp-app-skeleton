@@ -9,6 +9,7 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
+var autoprefixer = require('gulp-autoprefixer');
 
 
 // Dev Tasks
@@ -16,6 +17,10 @@ var runSequence = require('run-sequence');
 gulp.task('sass', function(){
     return gulp.src('app/scss/**/*.scss')
         .pipe(sass())
+        .pipe(autoprefixer({
+            browsers: ['> 5%'],
+            cascade: false
+        }))
         .pipe(gulp.dest('app/assets/css'))
         .pipe(browserSync.reload({
             stream: true
