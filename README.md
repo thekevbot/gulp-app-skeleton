@@ -7,6 +7,8 @@ To get started, clone this repo and run:
 npm install
 ````
 
+###Development
+
 To start watching for changes to your .scss, .js, and .html files and spin up a dev server run:
 
 ````
