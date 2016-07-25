@@ -50,6 +50,14 @@ gulp.task('default', function(callback){
 
 // Build Tasks
 
+gulp.task('minify', ['sass'], function(){
+    return gulp.src('app/*.html')
+        .pipe(useref())
+        .pipe(gulpIf('*.js', uglify()))
+        .pipe(gulpIf('*.css', cssnano()))
+        .pipe(gulp.dest('dist'))
+})
+
 gulp.task('images', function(){
     return gulp.src('app/assets/img/**/*.+(png|jpg|giv|svg)')
     .pipe(cache(imagemin({
@@ -63,21 +71,13 @@ gulp.task('fonts', function() {
   .pipe(cache(gulp.dest('dist/fonts')))
 })
 
-gulp.task('useref', ['sass'], function(){
-    return gulp.src('app/*.html')
-        .pipe(useref())
-        .pipe(gulpIf('*.js', uglify()))
-        .pipe(gulpIf('*.css', cssnano()))
-        .pipe(gulp.dest('dist'))
-})
-
 gulp.task('clean:dist', function() {
   return del.sync('dist');
 })
 
 gulp.task('build', function(callback){
     runSequence('clean:dist',
-        ['sass', 'useref', 'images', 'fonts'],
+        ['sass', 'minify', 'images', 'fonts'],
         callback
     )
 })
