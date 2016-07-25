@@ -20,7 +20,7 @@ To run the built in build tasks for a production site (which includes optimizing
 gulp build
 ````
 
-You can also run any of the build tasks separately as needed:
+**You can also run any of the build tasks separately as needed:**
 
 `minify`: Minifies & Uglifies JS and CSS
 
