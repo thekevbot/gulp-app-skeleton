@@ -22,10 +22,10 @@ gulp build
 
 **You can also run any of the build tasks separately as needed:**
 
-`minify`: Minifies & Uglifies JS and CSS
+`minify`: Minifies & uglifies js and css
 
-`images`: Optimizes image files and copies them to /dist
+`images`: Optimizes image files and copies them to app/dist
 
-`clean`: Cleans up any old files in /dist
+`clean`: Cleans up any old files in app/dist
 
-`fonts`: Copies fonts to /dist
+`fonts`: Copies fonts to app/dist
