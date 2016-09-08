@@ -1,15 +1,16 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
-var useref = require('gulp-useref');
-var uglify = require('gulp-uglify');
-var gulpIf = require('gulp-if');
-var cssnano = require('gulp-cssnano');
-var imagemin = require('gulp-imagemin');
-var cache = require('gulp-cache');
-var del = require('del');
-var runSequence = require('run-sequence');
-var autoprefixer = require('gulp-autoprefixer');
+var gulp = require('gulp'),
+    sass = require('gulp-sass'),
+    php = require('gulp-connect-php'),
+    browserSync = require('browser-sync').create(),
+    useref = require('gulp-useref'),
+    uglify = require('gulp-uglify'),
+    gulpIf = require('gulp-if'),
+    cssnano = require('gulp-cssnano'),
+    imagemin = require('gulp-imagemin'),
+    cache = require('gulp-cache'),
+    del = require('del'),
+    runSequence = require('run-sequence'),
+    autoprefixer = require('gulp-autoprefixer');
 
 
 // Dev Tasks
@@ -27,17 +28,23 @@ gulp.task('sass', function(){
         }))
 });
 
-gulp.task('browserSync', function(){
+gulp.task('php', function() {
+    php.server({base: 'app', port: 8010, keepalive: true});
+})
+
+gulp.task('browserSync',['php'], function(){
     browserSync.init({
-        server: {
-            baseDir: 'app'
-        },
-    })
+        proxy: '127.0.0.1:8010',
+        port: 8080,
+        open: true,
+        notify: false
+    });
 })
 
 gulp.task('watch', ['sass', 'browserSync'], function(){
     gulp.watch('app/scss/**/*.scss', ['sass']);
     gulp.watch('app/*.html', browserSync.reload);
+    gulp.watch('app/*.php', browserSync.reload);
     gulp.watch('app/js/**/*.js', browserSync.reload);
 });
 
